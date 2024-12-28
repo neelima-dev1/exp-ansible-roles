@@ -13,14 +13,21 @@
 #     name: common
 #     tasks_from: app-pre-req
 
-- name: remove html directory
-  ansible.builtin.file:
-    path: /usr/share/nginx/html
-    state: absent
-- name: create html directory
-  ansible.builtin.file:
-    path: /usr/share/nginx/html
-    state: directory   
+- name: import tasks from common role
+  tags:
+  - deployment
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-pre-req
+
+# - name: remove html directory
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: absent
+# - name: create html directory
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: directory   
 
 
 - name: copy expense conf
